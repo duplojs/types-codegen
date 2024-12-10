@@ -1,0 +1,46 @@
+{
+  "name": "@duplojs/types-codegen",
+  "version": "0.0.0",
+  "author": "mathcovax",
+  "license": "MIT",
+  "type": "module",
+  "repository": "https://github.com/duplojs/types-codegen",
+  "scripts": {
+    "build": "rollup --config && tsc-alias -p tsconfig.build.json",
+    "test:tu": "vitest --coverage",
+    "test:tu:watch": "vitest --coverage --watch",
+    "test:tu:update": "vitest --coverage --update",
+    "test:types": "npm run test:types:scripts && npm run integration:test:types",
+    "test:types:scripts": "tsc",
+    "integration:test:types": "npm -w test/integration run test:types",
+    "test:lint": "eslint",
+    "test:lint:fix": "eslint --fix",
+    "prepare": "husky"
+  },
+  "peerDependencies": {
+    "@duplojs/core": ">=0.23.0 <1.0.0",
+    "zod": ">=3.23.8 <4.0.0"
+  },
+  "dependencies": {
+    "@duplojs/zod-to-typescript": "0.2.2",
+    "commander": "^12.1.0",
+    "ignore": "^6.0.2",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@duplojs/eslint": "0.3.0",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^22.1.0",
+    "@vitest/coverage-istanbul": "^2.0.5",
+    "husky": "^9.1.4",
+    "rollup": "^4.22.4",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "tsc-alias": "^1.8.10",
+    "tslib": "^2.6.3",
+    "vite-tsconfig-paths": "^5.0.1",
+    "vitest": "^2.0.5"
+  },
+  "keywords": []
+}
