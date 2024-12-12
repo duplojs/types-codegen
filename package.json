@@ -25,7 +25,8 @@
     "@duplojs/zod-to-typescript": "0.2.2",
     "commander": "^12.1.0",
     "ignore": "^6.0.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "watcher": "^2.3.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.4.0",
