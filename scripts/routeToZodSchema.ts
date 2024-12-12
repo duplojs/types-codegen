@@ -35,7 +35,7 @@ export function routeToZodSchema(route: Route) {
 						? { response }
 						: { response: defaultResponseSchema }
 				),
-			}),
+			}).passthrough(),
 		)
 		.reduce<undefined | ZodType>(
 			(pv, cv) => (pv ? pv.or(cv) : cv),

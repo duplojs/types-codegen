@@ -1,3 +1,5 @@
+#!/usr/bin/env -S npx tsx
+
 import { instanceofDuplose, Route, useBuilder } from "@duplojs/core";
 import { ZodToTypescript } from "@duplojs/zod-to-typescript";
 import { routeToZodSchema } from "@scripts/index";
@@ -5,7 +7,7 @@ import { program } from "commander";
 import { type ZodType } from "zod";
 import ignore from "ignore";
 import { lstatSync, readdirSync, writeFileSync } from "fs";
-import { relative } from "path";
+import { relative, resolve } from "path";
 import Watcher from "watcher";
 import { fork } from "child_process";
 
@@ -37,7 +39,7 @@ const paths = (function importFile(path: string): string[] {
 			.filter((path) => !excludeValidator?.ignores(path))
 			.flatMap(importFile);
 	} else if (includeValidator.ignores(path)) {
-		return [path];
+		return [resolve(path)];
 	} else {
 		return [];
 	}
@@ -80,10 +82,14 @@ if (watch) {
 	if (routeSchema) {
 		writeFileSync(
 			output,
-			ZodToTypescript.convert(routeSchema),
+			ZodToTypescript.convert(
+				routeSchema,
+				{ name: "Route" },
+			),
 			"utf-8",
 		);
 	} else {
 		console.error("No route was found.");
 	}
 }
+

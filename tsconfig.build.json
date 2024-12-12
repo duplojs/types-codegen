@@ -7,6 +7,6 @@
 	"declarationDir": "dist",
 	"types": null,
   },
-  "include": ["scripts/**/*.ts"],
+  "include": ["scripts/**/*.ts", "bin/**/*.ts"],
   "exclude": ["scripts/**/*.test.ts"]
 }

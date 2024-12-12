@@ -1,4 +1,4 @@
-import { type Duplose, ExtractStep } from "@duplojs/core";
+import { type Duplose, ExtractStep, Process } from "@duplojs/core";
 
 export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
 	return [
@@ -6,9 +6,15 @@ export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
 			(preflightStep) => getExtractStepFromDuplose(preflightStep.parent),
 		),
 		...duplose.definiton.steps.flatMap(
-			(step) => step instanceof ExtractStep
-				? step
-				: [],
+			(step) => {
+				if (step.parent instanceof Process) {
+					return getExtractStepFromDuplose(step.parent);
+				}
+
+				return step instanceof ExtractStep
+					? step
+					: [];
+			},
 		),
 	];
 }

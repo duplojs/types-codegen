@@ -22,4 +22,20 @@ export default defineConfig([
 			}),
 		],
 	},
+	{
+		input: "bin/index.ts",
+		output: [
+			{
+				file: "dist/bin.mjs",
+				format: "esm",
+			},
+		],
+		plugins: [
+			typescript({
+				tsconfig: "tsconfig.build.json",
+				include: /\.[jt]sx?$/,
+				exclude: /node_modules/,
+			}),
+		],
+	},
 ]);
