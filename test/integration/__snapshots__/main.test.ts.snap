@@ -2,7 +2,7 @@
 
 exports[`command > generate file 1`] = `
 "interface ReceiveFormData<GenericValue extends Record<string, string | string[] | File[]>> {
-    extractor: (...args: any[]) => GenericValue;
+    extractor: (...args: any[]) => Promise<GenericValue>;
 }
 
 export { ReceiveFormData };

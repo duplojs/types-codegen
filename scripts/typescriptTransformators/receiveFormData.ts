@@ -52,7 +52,12 @@ const receiveFormDataTypeNode = factory.createInterfaceDeclaration(
 					),
 				],
 				factory.createTypeReferenceNode(
-					receiveFormDataGenericFirstParams,
+					"Promise",
+					[
+						factory.createTypeReferenceNode(
+							receiveFormDataGenericFirstParams,
+						),
+					],
 				),
 			),
 		),
