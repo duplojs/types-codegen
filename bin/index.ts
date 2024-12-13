@@ -1,15 +1,14 @@
 #!/usr/bin/env -S npx tsx
 
 import { instanceofDuplose, Route, useBuilder } from "@duplojs/core";
-import { ZodToTypescript } from "@duplojs/zod-to-typescript";
-import { routeToZodSchema } from "@scripts/index";
 import { program } from "commander";
-import { type ZodType } from "zod";
 import ignore from "ignore";
-import { lstatSync, readdirSync, writeFileSync } from "fs";
+import { lstatSync, readdirSync } from "fs";
 import { relative, resolve } from "path";
 import Watcher from "watcher";
 import { fork } from "child_process";
+import { writeFile } from "fs/promises";
+import { generateTypeFromRoutes } from "@scripts/generateTypeFromRoutes";
 
 program
 	.requiredOption("-i, --include <char>")
@@ -70,22 +69,15 @@ if (watch) {
 		await import(path);
 	}
 
-	const routeSchema = [...useBuilder.getAllCreatedDuplose()]
-		.filter((duplose) => instanceofDuplose(Route, duplose))
-		.map(routeToZodSchema)
-		.filter((value) => !!value)
-		.reduce<undefined | ZodType>(
-			(pv, cv) => (pv ? pv.or(cv) : cv),
-			undefined,
-		);
+	const routes = [...useBuilder.getAllCreatedDuplose()]
+		.filter((duplose) => instanceofDuplose(Route, duplose));
 
-	if (routeSchema) {
-		writeFileSync(
+	if (routes.length) {
+		const typeInString = generateTypeFromRoutes(routes);
+
+		await writeFile(
 			output,
-			ZodToTypescript.convert(
-				routeSchema,
-				{ name: "Route" },
-			),
+			typeInString,
 			"utf-8",
 		);
 	} else {

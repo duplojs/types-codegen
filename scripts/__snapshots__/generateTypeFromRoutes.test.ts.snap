@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generateTypeFromRoutes 1`] = `
+"type Route = {
+    method: "GET";
+    path: "/test";
+    query: {
+        page: number;
+    };
+    response: {
+        code: 200;
+        information: "test";
+        body: number;
+        ok: true;
+    };
+};"
+`;

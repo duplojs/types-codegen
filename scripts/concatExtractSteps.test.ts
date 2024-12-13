@@ -64,9 +64,7 @@ it("concatExtractSteps", () => {
 	expect(
 		result.query!.safeParse(undefined),
 	).toEqual({
-		data: {
-			page: 7,
-		},
+		data: undefined,
 		success: true,
 	});
 

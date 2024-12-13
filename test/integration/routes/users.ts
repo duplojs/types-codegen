@@ -1,4 +1,4 @@
-import { CreatedHttpResponse, makeResponseContract, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
+import { CreatedHttpResponse, makeResponseContract, NotFoundHttpResponse, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { userSchema } from "@schemas/users";
 
 useBuilder()
@@ -8,6 +8,11 @@ useBuilder()
 			userId: zod.string(),
 		},
 	})
+	.cut(
+		({ dropper }) => (dropper(null)),
+		[],
+		makeResponseContract(NotFoundHttpResponse, "user.notfound"),
+	)
 	.handler(
 		() => new OkHttpResponse("user.get", {
 			name: "John Doe",
@@ -27,4 +32,16 @@ useBuilder()
 	.handler(
 		(pickup) => new CreatedHttpResponse("user.created", pickup("body")),
 		makeResponseContract(CreatedHttpResponse, "user.created", userSchema),
+	);
+
+useBuilder()
+	.createRoute("GET", "/users")
+	.handler(
+		() => new OkHttpResponse("users.get", [
+			{
+				name: "John Doe",
+				age: 30,
+			},
+		]),
+		makeResponseContract(OkHttpResponse, "users.get", userSchema.array()),
 	);

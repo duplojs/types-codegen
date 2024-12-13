@@ -1,16 +1,24 @@
 import { zod } from "@duplojs/core";
 import { unionZodSchema } from "./unionZodSchema";
-import { ZodBoolean, ZodNumber, ZodString } from "zod";
 
 it("unionZodSchema", () => {
 	const schema = unionZodSchema([zod.string(), zod.number(), zod.boolean()]);
 
-	expect(schema._def.options[0])
-		.instanceof(ZodString);
+	expect(schema.safeParse("test"))
+		.toStrictEqual({
+			data: "test",
+			success: true,
+		});
 
-	expect(schema._def.options[1])
-		.instanceof(ZodNumber);
+	expect(schema.safeParse(1))
+		.toStrictEqual({
+			data: 1,
+			success: true,
+		});
 
-	expect(schema._def.options[2])
-		.instanceof(ZodBoolean);
+	expect(schema.safeParse(true))
+		.toStrictEqual({
+			data: true,
+			success: true,
+		});
 });
