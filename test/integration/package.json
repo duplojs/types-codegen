@@ -1,0 +1,14 @@
+{
+	"name": "test-integration",
+	"type": "module",
+	"scripts": {
+	  "test:types": "tsc"
+	},
+	"dependencies": {
+	  "@duplojs/core": "^0.23.0",
+	  "@duplojs/node": "^0.3.2"
+	},
+	"devDependencies": {
+		"@duplojs/types-codegen": "file:../.."
+	}
+  }

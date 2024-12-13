@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`instanceofTransformator 1`] = `
+"type Test = Blob;
+
+export { Test };"
+`;

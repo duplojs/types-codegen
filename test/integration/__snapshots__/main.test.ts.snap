@@ -1,0 +1,74 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`command > generate file 1`] = `
+"interface ReceiveFormData<GenericValue extends Record<string, string | string[] | File[]>> {
+    extractor: (...args: any[]) => GenericValue;
+}
+
+export { ReceiveFormData };
+
+type Routes = (({
+    method: "POST";
+    path: "/pictures";
+    body: ReceiveFormData<{
+        userId: string;
+        pictures: File[];
+    }>;
+    response: {
+        code: 200;
+        information: "picture.upload";
+        body: File;
+        ok: true;
+    };
+} | {
+    method: "GET";
+    path: "/users/{userId}";
+    params: {
+        userId: string;
+    };
+    response: {
+        code: 404;
+        information: "user.notfound";
+        body?: undefined;
+        ok: false;
+    } | {
+        code: 200;
+        information: "user.get";
+        body: {
+            name: string;
+            age: number;
+        };
+        ok: true;
+    };
+}) | {
+    method: "POST";
+    path: "/users";
+    body: {
+        name: string;
+        age: number;
+    };
+    response: {
+        code: 201;
+        information: "user.created";
+        body: {
+            name: string;
+            age: number;
+        };
+        ok: true;
+    };
+}) | {
+    method: "GET";
+    path: "/users";
+    response: {
+        code: 200;
+        information: "users.get";
+        body: {
+            name: string;
+            age: number;
+        }[];
+        ok: true;
+    };
+};
+
+export { Routes };"
+`;
