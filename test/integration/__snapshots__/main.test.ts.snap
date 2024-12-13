@@ -1,7 +1,26 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`command > generate file 1`] = `
-"type Route = ({
+"interface ReceiveFormData<GenericValue extends Record<string, string | string[] | File[]>> {
+    extractor: (...args: any[]) => GenericValue;
+}
+
+export { ReceiveFormData };
+
+type Routes = (({
+    method: "POST";
+    path: "/pictures";
+    body: ReceiveFormData<{
+        userId: string;
+        pictures: File[];
+    }>;
+    response: {
+        code: 200;
+        information: "picture.upload";
+        body: File;
+        ok: true;
+    };
+} | {
     method: "GET";
     path: "/users/{userId}";
     params: {
@@ -21,7 +40,7 @@ exports[`command > generate file 1`] = `
         };
         ok: true;
     };
-} | {
+}) | {
     method: "POST";
     path: "/users";
     body: {
@@ -49,5 +68,7 @@ exports[`command > generate file 1`] = `
         }[];
         ok: true;
     };
-};"
+};
+
+export { Routes };"
 `;
