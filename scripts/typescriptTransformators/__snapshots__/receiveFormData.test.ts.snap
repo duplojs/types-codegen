@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`receiveFormDataTransformator 1`] = `
+"interface ReceiveFormData<GenericValue extends Record<string, string | string[] | File[]>> {
+    extractor: (...args: any[]) => GenericValue;
+}
+
+export { ReceiveFormData };
+
+type Test = ReceiveFormData<{
+    picture: File[];
+    userId: string;
+    age: number;
+}>;
+
+export { Test };"
+`;
