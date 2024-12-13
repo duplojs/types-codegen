@@ -1,9 +1,10 @@
 import { zod, type Route } from "@duplojs/core";
-import { concactExtractSteps } from "./concactExtractSteps";
+import { concatExtractSteps } from "./concatExtractSteps";
 import { getExtractStepFromDuplose } from "./getExtractStepFromDuplose";
 import { getContractResponseFromDuplose } from "./getContractResponseFromDuplose";
 import { contractResponseToZodSchema } from "./contractResponseToZodSchema";
 import { type ZodType } from "zod";
+import { unionZodSchema } from "./unionZodSchema";
 
 export const defaultResponseSchema = zod.object({
 	code: zod.number(),
@@ -22,7 +23,7 @@ export function routeToZodSchema(route: Route) {
 		);
 
 	const extractStep = getExtractStepFromDuplose(route);
-	const variableRequestValue = concactExtractSteps(extractStep);
+	const variableRequestValue = concatExtractSteps(extractStep);
 
 	const routesSchema = route.definiton.paths
 		.map(
@@ -36,11 +37,7 @@ export function routeToZodSchema(route: Route) {
 						: { response: defaultResponseSchema }
 				),
 			}).passthrough(),
-		)
-		.reduce<undefined | ZodType>(
-			(pv, cv) => (pv ? pv.or(cv) : cv),
-			undefined,
 		);
 
-	return routesSchema;
+	return unionZodSchema(routesSchema);
 }

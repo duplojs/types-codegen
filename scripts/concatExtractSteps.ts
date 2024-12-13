@@ -1,5 +1,6 @@
 import { zod, type ExtractStep } from "@duplojs/core";
 import { ZodType } from "zod";
+import { zodShemaAcceptEmptyObject } from "./zodShemaAcceptEmptyObject";
 
 const keyofVariableRequestValue = <const>[
 	"body",
@@ -15,8 +16,13 @@ export type VariableRequestValue = Partial<
 	>
 >;
 
-export function concactExtractSteps(extractSteps: ExtractStep[]) {
-	return extractSteps
+export function concatExtractSteps(extractSteps: ExtractStep[]) {
+	const {
+		body,
+		params,
+		query,
+		headers,
+	} = extractSteps
 		.flatMap(
 			(extractStep) => keyofVariableRequestValue.map(
 				(key) => extractStep.parent[key]
@@ -51,4 +57,27 @@ export function concactExtractSteps(extractSteps: ExtractStep[]) {
 			},
 			{},
 		);
+
+	return {
+		...(body && {
+			body: zodShemaAcceptEmptyObject(body)
+				? body.optional()
+				: body,
+		}),
+		...(params && {
+			params: zodShemaAcceptEmptyObject(params)
+				? params.optional()
+				: params,
+		}),
+		...(query && {
+			query: zodShemaAcceptEmptyObject(query)
+				? query.optional()
+				: query,
+		}),
+		...(headers && {
+			headers: zodShemaAcceptEmptyObject(headers)
+				? headers.optional()
+				: headers,
+		}),
+	};
 }

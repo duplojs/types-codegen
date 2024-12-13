@@ -1,7 +1,7 @@
 import { ExtractStep, zod } from "@duplojs/core";
-import { concactExtractSteps } from "./concactExtractSteps";
+import { concatExtractSteps } from "./concatExtractSteps";
 
-it("concactExtractSteps", () => {
+it("concatExtractSteps", () => {
 	const extractSteps = [
 		new ExtractStep({
 			body: zod.object({
@@ -11,7 +11,7 @@ it("concactExtractSteps", () => {
 		}),
 		new ExtractStep({
 			query: {
-				page: zod.number(),
+				page: zod.number().optional(),
 			},
 		}),
 		new ExtractStep({
@@ -31,7 +31,7 @@ it("concactExtractSteps", () => {
 		}),
 	];
 
-	const result = concactExtractSteps(extractSteps);
+	const result = concatExtractSteps(extractSteps);
 
 	expect(
 		result.body!.safeParse({
@@ -62,9 +62,7 @@ it("concactExtractSteps", () => {
 	});
 
 	expect(
-		result.query!.safeParse({
-			page: 7,
-		}),
+		result.query!.safeParse(undefined),
 	).toEqual({
 		data: {
 			page: 7,

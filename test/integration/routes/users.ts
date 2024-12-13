@@ -5,11 +5,14 @@ useBuilder()
 	.createRoute("GET", "/users/{userId}")
 	.extract({
 		params: {
-			userid: zod.string(),
+			userId: zod.string(),
 		},
 	})
 	.handler(
-		() => new OkHttpResponse("user.get"),
+		() => new OkHttpResponse("user.get", {
+			name: "John Doe",
+			age: 30,
+		}),
 		makeResponseContract(OkHttpResponse, "user.get", userSchema),
 	);
 
@@ -22,6 +25,6 @@ useBuilder()
 		}),
 	})
 	.handler(
-		() => new CreatedHttpResponse("user.created"),
+		(pickup) => new CreatedHttpResponse("user.created", pickup("body")),
 		makeResponseContract(CreatedHttpResponse, "user.created", userSchema),
 	);
