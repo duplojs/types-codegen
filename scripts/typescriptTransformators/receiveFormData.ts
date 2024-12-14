@@ -24,6 +24,14 @@ const receiveFormDataTypeNode = factory.createInterfaceDeclaration(
 						factory.createArrayTypeNode(
 							factory.createKeywordTypeNode(SyntaxKind.StringKeyword),
 						),
+						factory.createKeywordTypeNode(SyntaxKind.NumberKeyword),
+						factory.createArrayTypeNode(
+							factory.createKeywordTypeNode(SyntaxKind.NumberKeyword),
+						),
+						factory.createTypeReferenceNode("Date"),
+						factory.createArrayTypeNode(
+							factory.createTypeReferenceNode("Date"),
+						),
 						factory.createArrayTypeNode(
 							factory.createTypeReferenceNode("File"),
 						),
