@@ -8,7 +8,7 @@ exports[`command > generate file 1`] = `
 /* v8 ignore start */
 // noinspection JSUnusedGlobalSymbols
 // @ts-nocheck
-interface CodegenReceiveFormData<GenericValue extends Record<string, string | string[] | File[]>> {
+interface CodegenReceiveFormData<GenericValue extends Record<string, string | string[] | number | number[] | Date | Date[] | File[]>> {
     extractor: (...args: any[]) => Promise<GenericValue>;
 }
 
