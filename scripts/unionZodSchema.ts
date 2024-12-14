@@ -1,9 +1,10 @@
 import { zod } from "@duplojs/core";
-import { ZodNever, type ZodType } from "zod";
+import { type ZodType } from "zod";
 
-export function unionZodSchema(zodSechema: ZodType[]) {
-	return zodSechema.reduce(
-		(pv, cv) => pv instanceof ZodNever ? cv : pv.or(cv),
-		zod.never(),
-	);
+export function unionZodSchema(zodSechemas: ZodType[]) {
+	return zod.union(<never>(
+		zodSechemas.length > 0
+			? zodSechemas
+			: [zod.never()]
+	));
 }

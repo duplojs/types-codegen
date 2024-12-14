@@ -15,7 +15,7 @@ export const defaultResponseSchema = zod.object({
 export function routeToZodSchema(route: Route) {
 	const contractResponses = getContractResponseFromDuplose(route);
 	const response = unionZodSchema(
-		contractResponses.length
+		contractResponses.length > 0
 			? contractResponses.map(contractResponseToZodSchema)
 			: [defaultResponseSchema],
 	);

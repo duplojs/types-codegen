@@ -5,7 +5,7 @@ import { ZodType } from "zod";
 
 const schemaKey = zod.never();
 
-const receiveFormDataInterfaceName = "ReceiveFormData";
+const receiveFormDataInterfaceName = "CodegenReceiveFormData";
 const receiveFormDataGenericFirstParams = "GenericValue";
 
 const receiveFormDataTypeNode = factory.createInterfaceDeclaration(

@@ -9,6 +9,7 @@ import Watcher from "watcher";
 import { fork } from "child_process";
 import { writeFile } from "fs/promises";
 import { generateTypeFromRoutes } from "@scripts/generateTypeFromRoutes";
+import { render } from "@scripts/render";
 
 program
 	.requiredOption("-i, --include <char>")
@@ -77,7 +78,7 @@ if (watch) {
 
 		await writeFile(
 			output,
-			typeInString,
+			render(typeInString),
 			"utf-8",
 		);
 	} else {
