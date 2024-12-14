@@ -49,7 +49,7 @@ if (watch) {
 	const watcher = new Watcher(paths, { ignoreInitial: true });
 
 	function launchFork() {
-		console.log("Generating types...");
+		console.log(`Start watch ${include}`);
 
 		fork(
 			import.meta.filename,
@@ -66,6 +66,8 @@ if (watch) {
 
 	launchFork();
 } else {
+	console.log("Generating types...");
+
 	for (const path of paths) {
 		await import(path);
 	}
@@ -73,7 +75,7 @@ if (watch) {
 	const routes = [...useBuilder.getAllCreatedDuplose()]
 		.filter((duplose) => instanceofDuplose(Route, duplose));
 
-	if (routes.length) {
+	if (routes.length > 0) {
 		const typeInString = generateTypeFromRoutes(routes);
 
 		await writeFile(
@@ -81,6 +83,7 @@ if (watch) {
 			render(typeInString),
 			"utf-8",
 		);
+		console.log(`All the types were generated in ${output}.`);
 	} else {
 		console.error("No route was found.");
 	}
