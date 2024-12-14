@@ -14,7 +14,7 @@ export function generateTypeFromRoutes(routes: Route[]) {
 
 	zodToTypescript.append(
 		routesSchema,
-		"Routes",
+		"CodegenRoutes",
 	);
 
 	return zodToTypescript.toString(true);
