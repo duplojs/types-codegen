@@ -1,5 +1,5 @@
-export * from "./typescriptTransformators/instanceof";
-export * from "./typescriptTransformators/receiveFormData";
+export * from "./zodToTypescript/typescriptTransformators/instanceof";
+export * from "./zodToTypescript/typescriptTransformators/receiveFormData";
 
 export * from "./concatExtractSteps";
 export * from "./contractResponseToZodSchema";
