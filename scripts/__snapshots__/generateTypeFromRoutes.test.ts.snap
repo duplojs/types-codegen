@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`generateTypeFromRoutes 1`] = `
-"type Routes = {
+"type CodegenRoutes = ({
     method: "GET";
     path: "/test";
     query: {
@@ -13,7 +13,7 @@ exports[`generateTypeFromRoutes 1`] = `
         body: number;
         ok: true;
     };
-};
+});
 
-export { Routes };"
+export { CodegenRoutes };"
 `;

@@ -1,13 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`receiveFormDataTransformator 1`] = `
-"interface ReceiveFormData<GenericValue extends Record<string, string | string[] | File[]>> {
+"interface CodegenReceiveFormData<GenericValue extends Record<string, string | string[] | File[]>> {
     extractor: (...args: any[]) => Promise<GenericValue>;
 }
 
-export { ReceiveFormData };
+export { CodegenReceiveFormData };
 
-type Test = ReceiveFormData<{
+type Test = CodegenReceiveFormData<{
     picture: File[];
     userId: string;
     age: number;
