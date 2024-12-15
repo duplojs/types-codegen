@@ -13,7 +13,7 @@ describe("command", () => {
 	it("generate file", () => {
 		spawnSync(
 			"npx",
-			["duplojs-types-codegen", "-i", "routes", "-o", "../output/outputTypeCodegen.d.ts"],
+			["duplojs-types-codegen", "-i", "routes/users.ts", "-o", "../output/outputTypeCodegen.d.ts", "--import", "routes/documents.ts"],
 			{
 				cwd: `${process.cwd()}/test/integration`,
 			},
