@@ -15,11 +15,12 @@ program
 	.requiredOption("-i, --include <char>")
 	.requiredOption("-o, --output <char>")
 	.option("-e, --exclude <char>")
-	.option("-w, --watch");
+	.option("-w, --watch")
+	.option("--import <char>");
 
 program.parse();
 
-const { include, exclude, output, watch } = program.opts<Record<string, string>>();
+const { include = "", exclude, output = "", watch, import: importScripts } = program.opts<Partial<Record<string, string>>>();
 
 const includeValidator = ignore().add(include.split(","));
 
@@ -68,7 +69,7 @@ if (watch) {
 } else {
 	console.log("Generating types...");
 
-	for (const path of paths) {
+	for (const path of [...(importScripts?.split(",") || []), ...paths]) {
 		await import(path);
 	}
 
