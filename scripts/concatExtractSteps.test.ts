@@ -1,5 +1,6 @@
 import { ExtractStep, zod } from "@duplojs/core";
 import { concatExtractSteps } from "./concatExtractSteps";
+import { ignoreThisZodSchema } from "./ignore/ignoreThisZodSchema";
 
 it("concatExtractSteps", () => {
 	const extractSteps = [
@@ -27,6 +28,11 @@ it("concatExtractSteps", () => {
 		new ExtractStep({
 			body: {
 				test: zod.string(),
+			},
+		}),
+		new ExtractStep({
+			params: {
+				test: ignoreThisZodSchema(zod.string()),
 			},
 		}),
 	];
