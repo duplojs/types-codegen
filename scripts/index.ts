@@ -1,3 +1,6 @@
+export * from "./ignore/ignoreThisDuplose";
+export * from "./ignore/ignoreThisZodSchema";
+
 export * from "./zodToTypescript/typescriptTransformators/instanceof";
 export * from "./zodToTypescript/typescriptTransformators/receiveFormData";
 

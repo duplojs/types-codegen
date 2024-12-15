@@ -27,12 +27,12 @@
   "workspaces": [
     "test/integration"
   ],
-  "types": "./dist/index.d.ts",
+  "types": "./dist/scripts/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/scripts/index.d.ts"
     }
   },
   "peerDependencies": {
