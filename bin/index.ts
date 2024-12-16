@@ -1,4 +1,5 @@
 #!/usr/bin/env -S npx tsx
+/* eslint-disable no-console */
 
 import { instanceofDuplose, Route, useBuilder } from "@duplojs/core";
 import { program } from "commander";
@@ -16,11 +17,19 @@ program
 	.requiredOption("-o, --output <char>")
 	.option("-e, --exclude <char>")
 	.option("-w, --watch")
-	.option("--import <char>");
+	.option("--import <char>")
+	.option("--require <char>");
 
 program.parse();
 
-const { include = "", exclude, output = "", watch, import: importScripts } = program.opts<Partial<Record<string, string>>>();
+const {
+	include = "",
+	exclude,
+	output = "",
+	watch,
+	import: importModule,
+	require: requireScript,
+} = program.opts<Partial<Record<string, string>>>();
 
 const includeValidator = ignore().add(include.split(","));
 
@@ -69,7 +78,13 @@ if (watch) {
 } else {
 	console.log("Generating types...");
 
-	for (const path of [...(importScripts?.split(",") || []), ...paths]) {
+	const importList = [
+		...(importModule?.split(",") || []),
+		...(requireScript?.split(",").map((path) => relative(process.cwd(), path)) || []),
+		...paths,
+	];
+
+	for (const path of importList) {
 		await import(path);
 	}
 
