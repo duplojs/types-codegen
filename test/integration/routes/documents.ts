@@ -3,6 +3,9 @@ import { makeResponseContract, OkHttpResponse, recieveFiles, useBuilder, zod, Fi
 useBuilder()
 	.createRoute("POST", "/pictures")
 	.extract({
+		headers: {
+			"test-headers": zod.string().optional(),
+		},
 		body: zod.receiveFormData({
 			userId: zod.string(),
 			pictures: recieveFiles({
