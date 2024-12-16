@@ -29,6 +29,7 @@ const {
 	watch,
 	import: importModule,
 	require: requireScript,
+
 } = program.opts<Partial<Record<string, string>>>();
 
 const includeValidator = ignore().add(include.split(","));
@@ -80,7 +81,7 @@ if (watch) {
 
 	const importList = [
 		...(importModule?.split(",") || []),
-		...(requireScript?.split(",").map((path) => relative(process.cwd(), path)) || []),
+		...(requireScript?.split(",").map((path) => resolve(process.cwd(), path)) || []),
 		...paths,
 	];
 

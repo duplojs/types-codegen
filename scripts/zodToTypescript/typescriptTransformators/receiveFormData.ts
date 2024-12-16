@@ -1,7 +1,6 @@
-import { getTypedEntries, zod, ZodReceiveFormData } from "@duplojs/core";
+import { getTypedEntries, zod, type ZodSpace, ZodReceiveFormData } from "@duplojs/core";
 import { type TypescriptTransformator } from "@duplojs/zod-to-typescript";
 import { factory, SyntaxKind } from "typescript";
-import { ZodType } from "zod";
 
 const schemaKey = zod.never();
 
@@ -88,10 +87,10 @@ export const receiveFormDataTransformator: TypescriptTransformator = {
 				findTypescriptTransformator(
 					zod.object(
 						getTypedEntries(zodSchema.recieveFormDataParams)
-							.reduce<Record<string, ZodType>>(
+							.reduce<Record<string, ZodSpace.ZodType>>(
 								(pv, [key, value]) => ({
 									...pv,
-									[key]: value instanceof ZodType
+									[key]: value instanceof zod.ZodType
 										? value
 										: zod.instanceof(File).array(),
 								}),

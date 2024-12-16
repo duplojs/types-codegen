@@ -1,5 +1,4 @@
-import { zod, type ExtractStep } from "@duplojs/core";
-import { ZodType } from "zod";
+import { zod, type ExtractStep, type ZodSpace } from "@duplojs/core";
 import { zodShemaAcceptEmptyObject } from "./zodShemaAcceptEmptyObject";
 import { removeIgnoredZodSchemaFromExtractValue } from "./ignore/ignoreThisZodSchema";
 
@@ -13,7 +12,7 @@ const keyofVariableRequestValue = <const>[
 export type VariableRequestValue = Partial<
 	Record<
 		typeof keyofVariableRequestValue[number],
-		ZodType
+		ZodSpace.ZodType
 	>
 >;
 
@@ -46,7 +45,7 @@ export function concatExtractSteps(extractSteps: ExtractStep[]) {
 		.map(
 			([key, value]) => <const>[
 				key,
-				value instanceof ZodType
+				value instanceof zod.ZodType
 					? value
 					: zod.object(value),
 			],
