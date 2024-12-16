@@ -1,7 +1,6 @@
-import { zod } from "@duplojs/core";
-import { type ZodType } from "zod";
+import { zod, type ZodSpace } from "@duplojs/core";
 
-export function unionZodSchema(zodSechemas: ZodType[]) {
+export function unionZodSchema(zodSechemas: ZodSpace.ZodType[]) {
 	return zod.union(<never>(
 		zodSechemas.length > 0
 			? zodSechemas

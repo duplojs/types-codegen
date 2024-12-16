@@ -1,11 +1,11 @@
 import { type ZodSchemaHook } from "@duplojs/zod-to-typescript";
-import { ZodDefault, ZodOptional } from "zod";
+import { zod } from "@duplojs/core";
 
 export const defaultToOptionalHook: ZodSchemaHook
-= (zodSchema, context, output) => zodSchema instanceof ZodDefault
+= (zodSchema, context, output) => zodSchema instanceof zod.ZodDefault
 	? output(
 		"next",
-		ZodOptional.create(zodSchema._def.innerType),
+		zod.ZodOptional.create(zodSchema._def.innerType),
 	)
 	: output(
 		"next",

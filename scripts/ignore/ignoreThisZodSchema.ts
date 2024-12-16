@@ -1,5 +1,4 @@
-import { getTypedEntries } from "@duplojs/core";
-import { ZodType } from "zod";
+import { getTypedEntries, zod, type ZodSpace } from "@duplojs/core";
 
 declare module "zod" {
 	interface ZodType {
@@ -8,21 +7,21 @@ declare module "zod" {
 }
 
 export function ignoreThisZodSchema<
-	GenericZodSchema extends ZodType,
+	GenericZodSchema extends ZodSpace.ZodType,
 >(zodSchema: GenericZodSchema) {
 	zodSchema._typesCodegneIgnore = true;
 
 	return zodSchema;
 }
 
-export function zodSchemaIsIgnored(zodschema: ZodType) {
+export function zodSchemaIsIgnored(zodschema: ZodSpace.ZodType) {
 	return zodschema._typesCodegneIgnore === true;
 }
 
 export function removeIgnoredZodSchemaFromExtractValue(
-	extractValue: ZodType | Record<string, ZodType>,
+	extractValue: ZodSpace.ZodType | Record<string, ZodSpace.ZodType>,
 ) {
-	if (extractValue instanceof ZodType) {
+	if (extractValue instanceof zod.ZodType) {
 		if (zodSchemaIsIgnored(extractValue)) {
 			return undefined;
 		} else {
@@ -30,7 +29,7 @@ export function removeIgnoredZodSchemaFromExtractValue(
 		}
 	} else {
 		const extractValueWithoutIgnoredZodSchema = getTypedEntries(extractValue)
-			.reduce<Record<string, ZodType>>(
+			.reduce<Record<string, Zod.ZodType>>(
 				(pv, [key, value]) => {
 					if (zodSchemaIsIgnored(value)) {
 						return pv;
