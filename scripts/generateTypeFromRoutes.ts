@@ -1,4 +1,4 @@
-import { type Route } from "@duplojs/core";
+import { ZodSpace, type Route } from "@duplojs/core";
 import { routeToZodSchema } from "./routeToZodSchema";
 import { unionZodSchema } from "./unionZodSchema";
 import { ZodToTypescript } from "@duplojs/zod-to-typescript";
@@ -13,6 +13,8 @@ export function generateTypeFromRoutes(routes: Route[]) {
 			.filter((route) => !duploseIsIgnored(route))
 			.map(routeToZodSchema),
 	);
+
+	ZodToTypescript.injectZod(ZodSpace);
 
 	const zodToTypescript = new ZodToTypescript([instanceofTransformator, receiveFormDataTransformator]);
 
