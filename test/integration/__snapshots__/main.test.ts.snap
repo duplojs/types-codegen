@@ -21,6 +21,9 @@ type CodegenRoutes = ({
         userId: string;
         pictures: File[];
     }>;
+    headers?: {
+        "test-headers"?: string | undefined;
+    } | undefined;
     response: {
         code: 200;
         information: "picture.upload";
@@ -151,6 +154,9 @@ type CodegenRoutes = ({
         userId: string;
         pictures: File[];
     }>;
+    headers?: {
+        "test-headers"?: string | undefined;
+    } | undefined;
     response: {
         code: 200;
         information: "picture.upload";
