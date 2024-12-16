@@ -29,7 +29,6 @@ const {
 	watch,
 	import: importModule,
 	require: requireScript,
-
 } = program.opts<Partial<Record<string, string>>>();
 
 const includeValidator = ignore().add(include.split(","));
@@ -104,5 +103,6 @@ if (watch) {
 	} else {
 		console.error("No route was found.");
 	}
+	process.exit();
 }
 

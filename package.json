@@ -36,7 +36,7 @@
     }
   },
   "peerDependencies": {
-    "@duplojs/core": ">=0.23.0 <1.0.0"
+    "@duplojs/core": ">=0.23.1 <1.0.0"
   },
   "dependencies": {
     "@duplojs/zod-to-typescript": "0.2.2",
