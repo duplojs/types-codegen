@@ -38,7 +38,6 @@ it("routeToZodSchema", () => {
 				code: 200,
 				information: "test",
 				body: "toto",
-				ok: true,
 			},
 		}),
 	).toStrictEqual({
@@ -53,7 +52,6 @@ it("routeToZodSchema", () => {
 				body: "toto",
 				code: 200,
 				information: "test",
-				ok: true,
 			},
 		},
 		success: true,

@@ -5,8 +5,5 @@ export function contractResponseToZodSchema(contractResponse: ContractResponse) 
 		code: zod.literal(contractResponse.code),
 		information: zod.literal(contractResponse.information),
 		body: contractResponse.body,
-		ok: zod.literal(
-			!!(contractResponse.code >= 200 && contractResponse.code <= 299),
-		),
 	});
 }
