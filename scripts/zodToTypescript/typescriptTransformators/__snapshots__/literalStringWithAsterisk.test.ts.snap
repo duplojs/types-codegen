@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`literalStringWithAsterisk 1`] = `
+"type Test = \`totot\${string}test\${string}ff\`;
+
+export { Test };
+
+type Path = \`/users/\${string}\`;
+
+export { Path };"
+`;

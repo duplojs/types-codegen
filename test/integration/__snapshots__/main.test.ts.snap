@@ -28,7 +28,6 @@ type CodegenRoutes = ({
         code: 200;
         information: "picture.upload";
         body: File;
-        ok: true;
     };
 }) | ({
     method: "GET";
@@ -40,7 +39,6 @@ type CodegenRoutes = ({
         code: 404;
         information: "user.notfound";
         body?: undefined;
-        ok: false;
     } | {
         code: 200;
         information: "user.get";
@@ -48,7 +46,6 @@ type CodegenRoutes = ({
             name: string;
             age: number;
         };
-        ok: true;
     };
 }) | ({
     method: "POST";
@@ -64,7 +61,6 @@ type CodegenRoutes = ({
             name: string;
             age: number;
         };
-        ok: true;
     };
 }) | ({
     method: "GET";
@@ -76,7 +72,6 @@ type CodegenRoutes = ({
             name: string;
             age: number;
         }[];
-        ok: true;
     };
 });
 
@@ -109,7 +104,6 @@ type CodegenRoutes = ({
         code: 404;
         information: "user.notfound";
         body?: undefined;
-        ok: false;
     } | {
         code: 200;
         information: "user.get";
@@ -117,7 +111,6 @@ type CodegenRoutes = ({
             name: string;
             age: number;
         };
-        ok: true;
     };
 }) | ({
     method: "POST";
@@ -133,7 +126,6 @@ type CodegenRoutes = ({
             name: string;
             age: number;
         };
-        ok: true;
     };
 }) | ({
     method: "GET";
@@ -145,7 +137,6 @@ type CodegenRoutes = ({
             name: string;
             age: number;
         }[];
-        ok: true;
     };
 }) | ({
     method: "POST";
@@ -161,7 +152,6 @@ type CodegenRoutes = ({
         code: 200;
         information: "picture.upload";
         body: File;
-        ok: true;
     };
 });
 

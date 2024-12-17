@@ -11,7 +11,6 @@ it("contractResponseToZodSchema", () => {
 			code: 200,
 			information: "test",
 			body: "my super body",
-			ok: true,
 		}),
 	)
 		.toStrictEqual({
@@ -19,7 +18,6 @@ it("contractResponseToZodSchema", () => {
 				code: 200,
 				information: "test",
 				body: "my super body",
-				ok: true,
 			},
 			success: true,
 		});
