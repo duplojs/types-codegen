@@ -72,7 +72,7 @@ if (watch) {
 		);
 	}
 
-	watcher.on("change", launchFork);
+	watcher.on("all", launchFork);
 
 	launchFork();
 } else {
