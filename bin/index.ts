@@ -56,6 +56,8 @@ const paths = (function importFile(path: string): string[] {
 })(process.cwd());
 
 if (watch) {
+	console.log(`Start watch ${include}`);
+
 	const watcher = new Watcher(paths, { ignoreInitial: true });
 
 	function launchFork() {
@@ -72,7 +74,7 @@ if (watch) {
 		);
 	}
 
-	watcher.on("change", launchFork);
+	watcher.on("all", launchFork);
 
 	launchFork();
 } else {
