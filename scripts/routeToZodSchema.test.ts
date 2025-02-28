@@ -1,4 +1,4 @@
-import { OkHttpResponse, useBuilder, zod } from "@duplojs/core";
+import { createProcess, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { routeToZodSchema } from "./routeToZodSchema";
 import path from "path";
 
@@ -6,8 +6,7 @@ it("routeToZodSchema", () => {
 	const routeContract = new OkHttpResponse("test", zod.string());
 	const processContract = new OkHttpResponse("test", zod.undefined());
 
-	const process = useBuilder()
-		.createProcess("test")
+	const process = createProcess("test")
 		.extract({ params: { id: zod.string() } })
 		.cut(
 			() => new OkHttpResponse("test"),

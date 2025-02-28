@@ -1,4 +1,4 @@
-import { type Duplose, ExtractStep, Process } from "@duplojs/core";
+import { type Duplose, ExtractStep, instanceofDuplose, Process, Route } from "@duplojs/core";
 import { duploseIsIgnored } from "./ignore/ignoreThisDuplose";
 
 export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
@@ -6,10 +6,14 @@ export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
 		return [];
 	}
 
-	return [
-		...duplose.definiton.preflightSteps.flatMap(
+	const extractStepFromPreflight = instanceofDuplose(Route, duplose)
+		? duplose.definiton.preflightSteps.flatMap(
 			(preflightStep) => getExtractStepFromDuplose(preflightStep.parent),
-		),
+		)
+		: [];
+
+	return [
+		...extractStepFromPreflight,
 		...duplose.definiton.steps.flatMap(
 			(step) => {
 				if (step.parent instanceof Process) {

@@ -1,4 +1,5 @@
-import { getTypedEntries, zod, type ZodSpace } from "@duplojs/core";
+import { zod, type ZodSpace } from "@duplojs/core";
+import { getTypedEntries } from "@duplojs/utils";
 
 declare module "zod" {
 	interface ZodType {

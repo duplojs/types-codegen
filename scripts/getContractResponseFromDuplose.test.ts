@@ -1,4 +1,4 @@
-import { OkHttpResponse, useBuilder, zod } from "@duplojs/core";
+import { createProcess, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { getContractResponseFromDuplose } from "./getContractResponseFromDuplose";
 import { IgnoreThisDuplose } from "./ignore/ignoreThisDuplose";
 
@@ -6,8 +6,7 @@ it("getContractResponseFromDuplose", () => {
 	const routeContract = new OkHttpResponse("test", zod.undefined());
 	const processContract = new OkHttpResponse("test", zod.undefined());
 
-	const process = useBuilder()
-		.createProcess("test")
+	const process = createProcess("test")
 		.cut(
 			() => new OkHttpResponse("test"),
 			[],
@@ -15,8 +14,7 @@ it("getContractResponseFromDuplose", () => {
 		)
 		.exportation();
 
-	const ignoredProcess = useBuilder()
-		.createProcess("test")
+	const ignoredProcess = createProcess("test")
 		.extract({ body: {} })
 		.cut(
 			() => new OkHttpResponse("test"),

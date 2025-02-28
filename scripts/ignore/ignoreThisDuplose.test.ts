@@ -1,4 +1,4 @@
-import { Description, OkHttpResponse, useBuilder } from "@duplojs/core";
+import { createProcess, Description, OkHttpResponse } from "@duplojs/core";
 import { duploseIsIgnored, IgnoreThisDuplose } from "./ignoreThisDuplose";
 
 describe("IgnoreThisRoute", () => {
@@ -7,8 +7,7 @@ describe("IgnoreThisRoute", () => {
 	});
 
 	it("duploseIsIgnored", () => {
-		const ignoredProcess = useBuilder()
-			.createProcess("test")
+		const ignoredProcess = createProcess("test")
 			.extract({ body: {} })
 			.cut(
 				() => new OkHttpResponse("test"),

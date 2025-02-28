@@ -1,5 +1,5 @@
 import { ZodToTypescript } from "@duplojs/zod-to-typescript";
-import { zod, ZodSpace } from "@duplojs/core";
+import { ZodSpace } from "@duplojs/core";
 import { literalStringWithAsterisk } from "./literalStringWithAsterisk";
 import { ZodLiteral } from "zod";
 

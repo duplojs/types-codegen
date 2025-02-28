@@ -1,4 +1,5 @@
-import { getTypedEntries, zod, type ZodSpace, ZodReceiveFormData } from "@duplojs/core";
+import { zod, type ZodSpace, ZodReceiveFormData } from "@duplojs/core";
+import { getTypedEntries } from "@duplojs/utils";
 import { type TypescriptTransformator } from "@duplojs/zod-to-typescript";
 import { factory, SyntaxKind } from "typescript";
 

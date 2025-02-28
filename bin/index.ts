@@ -1,7 +1,7 @@
 #!/usr/bin/env -S npx tsx
 /* eslint-disable no-console */
 
-import { instanceofDuplose, Route, useBuilder } from "@duplojs/core";
+import { useRouteBuilder } from "@duplojs/core";
 import { program } from "commander";
 import ignore from "ignore";
 import { lstatSync, readdirSync } from "fs";
@@ -39,7 +39,7 @@ const excludeValidator = exclude
 
 const devFolderValidator = ignore().add([".git", "node_modules", "vendor", ".github", "dist", "coverage"]);
 
-const paths = (function importFile(path: string): string[] {
+const paths = (function findFiles(path: string): string[] {
 	const stat = lstatSync(path);
 
 	if (stat.isDirectory()) {
@@ -47,7 +47,7 @@ const paths = (function importFile(path: string): string[] {
 			.map((subpath) => relative(process.cwd(), `${path}/${subpath}`))
 			.filter((path) => !devFolderValidator.ignores(path))
 			.filter((path) => !excludeValidator?.ignores(path))
-			.flatMap(importFile);
+			.flatMap(findFiles);
 	} else if (includeValidator.ignores(path)) {
 		return [resolve(path)];
 	} else {
@@ -61,8 +61,6 @@ if (watch) {
 	const watcher = new Watcher(paths, { ignoreInitial: true });
 
 	function launchFork() {
-		console.log(`Start watch ${include}`);
-
 		fork(
 			import.meta.filename,
 			process.argv.filter((arg) => arg !== "-w" && arg !== "--watch"),
@@ -90,8 +88,7 @@ if (watch) {
 		await import(path);
 	}
 
-	const routes = [...useBuilder.getAllCreatedDuplose()]
-		.filter((duplose) => instanceofDuplose(Route, duplose));
+	const routes = [...useRouteBuilder.getAllCreatedRoute()];
 
 	if (routes.length > 0) {
 		const typeInString = generateTypeFromRoutes(routes);

@@ -1,18 +1,16 @@
-import { ExtractStep, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
+import { createProcess, ExtractStep, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { getExtractStepFromDuplose } from "./getExtractStepFromDuplose";
 import { IgnoreThisDuplose } from "./ignore/ignoreThisDuplose";
 
 it("getExtractStepFromDuplose", () => {
-	const process = useBuilder()
-		.createProcess("test")
+	const process = createProcess("test")
 		.extract({ body: {} })
 		.cut(
 			() => new OkHttpResponse("test"),
 		)
 		.exportation();
 
-	const ignoredProcess = useBuilder()
-		.createProcess("test")
+	const ignoredProcess = createProcess("test")
 		.extract({ body: {} })
 		.cut(
 			() => new OkHttpResponse("test"),
