@@ -1,6 +1,6 @@
 import { createProcess, ExtractStep, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { getExtractStepFromDuplose } from "./getExtractStepFromDuplose";
-import { IgnoreThisDuplose } from "./ignore/ignoreThisDuplose";
+import { IgnoreByTypeCodegenDescription } from "./ignore/ignoreByTypeCodegenDescription";
 
 it("getExtractStepFromDuplose", () => {
 	const process = createProcess("test")
@@ -15,7 +15,7 @@ it("getExtractStepFromDuplose", () => {
 		.cut(
 			() => new OkHttpResponse("test"),
 		)
-		.exportation([], new IgnoreThisDuplose());
+		.exportation([], new IgnoreByTypeCodegenDescription());
 
 	const route = useBuilder()
 		.preflight(process)

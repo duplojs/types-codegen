@@ -1,6 +1,6 @@
 import { makeResponseContract, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { generateTypeFromRoutes } from "./generateTypeFromRoutes";
-import { IgnoreThisDuplose } from "./ignore/ignoreThisDuplose";
+import { IgnoreByTypeCodegenDescription } from "./ignore/ignoreByTypeCodegenDescription";
 
 it("generateTypeFromRoutes", () => {
 	const route = useBuilder()
@@ -16,7 +16,7 @@ it("generateTypeFromRoutes", () => {
 		);
 
 	const ignoredRoute = useBuilder()
-		.createRoute("GET", "/test", new IgnoreThisDuplose())
+		.createRoute("GET", "/test", new IgnoreByTypeCodegenDescription())
 		.extract({
 			query: {
 				page: zod.number(),

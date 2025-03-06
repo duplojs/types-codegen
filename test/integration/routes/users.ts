@@ -1,6 +1,6 @@
 import { CreatedHttpResponse, makeResponseContract, NotFoundHttpResponse, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { userSchema } from "@schemas/users";
-import { IgnoreThisDuplose, ignoreThisZodSchema } from "@duplojs/types-codegen";
+import { IgnoreByTypeCodegenDescription, ignoreThisZodSchema } from "@duplojs/types-codegen";
 
 useBuilder()
 	.createRoute("GET", "/users/{userId}")
@@ -53,7 +53,7 @@ useBuilder()
 	);
 
 useBuilder()
-	.createRoute("GET", "/ignore-this-route", new IgnoreThisDuplose())
+	.createRoute("GET", "/ignore-this-route", new IgnoreByTypeCodegenDescription())
 	.handler(
 		() => new OkHttpResponse("mySuperInfo", "test"),
 	);

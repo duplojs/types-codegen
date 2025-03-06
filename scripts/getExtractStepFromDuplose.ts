@@ -1,5 +1,5 @@
 import { type Duplose, ExtractStep, instanceofDuplose, Process, Route } from "@duplojs/core";
-import { duploseIsIgnored } from "./ignore/ignoreThisDuplose";
+import { duploseIsIgnored } from "./ignore/ignoreByTypeCodegenDescription";
 
 export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
 	if (duploseIsIgnored(duplose)) {

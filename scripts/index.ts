@@ -1,4 +1,4 @@
-export * from "./ignore/ignoreThisDuplose";
+export * from "./ignore/ignoreByTypeCodegenDescription";
 export * from "./ignore/ignoreThisZodSchema";
 
 export * from "./zodToTypescript/typescriptTransformators/instanceof";

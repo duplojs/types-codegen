@@ -1,9 +1,9 @@
 import { createProcess, Description, OkHttpResponse } from "@duplojs/core";
-import { duploseIsIgnored, IgnoreThisDuplose } from "./ignoreThisDuplose";
+import { duploseIsIgnored, IgnoreByTypeCodegenDescription } from "./ignoreByTypeCodegenDescription";
 
 describe("IgnoreThisRoute", () => {
 	it("Description", () => {
-		expect(new IgnoreThisDuplose()).instanceof(Description);
+		expect(new IgnoreByTypeCodegenDescription()).instanceof(Description);
 	});
 
 	it("duploseIsIgnored", () => {
@@ -12,7 +12,7 @@ describe("IgnoreThisRoute", () => {
 			.cut(
 				() => new OkHttpResponse("test"),
 			)
-			.exportation([], new IgnoreThisDuplose());
+			.exportation([], new IgnoreByTypeCodegenDescription());
 
 		expect(
 			duploseIsIgnored(ignoredProcess),
