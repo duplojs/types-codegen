@@ -1,5 +1,4 @@
-export * from "./ignore/ignoreByTypeCodegenDescription";
-export * from "./ignore/ignoreThisZodSchema";
+export * from "./ignoreByTypeCodegenDescription";
 
 export * from "./zodToTypescript/typescriptTransformators/instanceof";
 export * from "./zodToTypescript/typescriptTransformators/receiveFormData";

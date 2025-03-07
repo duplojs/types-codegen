@@ -1,6 +1,6 @@
 import { createProcess, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { getContractResponseFromDuplose } from "./getContractResponseFromDuplose";
-import { IgnoreByTypeCodegenDescription } from "./ignore/ignoreByTypeCodegenDescription";
+import { IgnoreByTypeCodegenDescription } from "./ignoreByTypeCodegenDescription";
 
 it("getContractResponseFromDuplose", () => {
 	const routeContract = new OkHttpResponse("test", zod.undefined());
@@ -18,6 +18,8 @@ it("getContractResponseFromDuplose", () => {
 		.extract({ body: {} })
 		.cut(
 			() => new OkHttpResponse("test"),
+			[],
+			processContract,
 		)
 		.exportation([], new IgnoreByTypeCodegenDescription());
 
@@ -26,12 +28,16 @@ it("getContractResponseFromDuplose", () => {
 		.createRoute("GET", "/test")
 		.execute(process)
 		.execute(ignoredProcess)
+		.cut(
+			() => new OkHttpResponse("test"),
+			[],
+			processContract,
+			new IgnoreByTypeCodegenDescription(),
+		)
 		.handler(
 			() => new OkHttpResponse("test"),
 			routeContract,
 		);
 
-	const rc = getContractResponseFromDuplose(route);
-
-	expect(rc).toEqual([processContract, processContract, routeContract]);
+	expect(getContractResponseFromDuplose(route)).toEqual([processContract, processContract, routeContract]);
 });

@@ -1,5 +1,5 @@
-import { createProcess, Description, OkHttpResponse } from "@duplojs/core";
-import { duploseIsIgnored, IgnoreByTypeCodegenDescription } from "./ignoreByTypeCodegenDescription";
+import { createProcess, Description, ExtractStep, OkHttpResponse } from "@duplojs/core";
+import { duploseIsIgnored, IgnoreByTypeCodegenDescription, stepIsIgnored } from "./ignoreByTypeCodegenDescription";
 
 describe("IgnoreThisRoute", () => {
 	it("Description", () => {
@@ -16,6 +16,18 @@ describe("IgnoreThisRoute", () => {
 
 		expect(
 			duploseIsIgnored(ignoredProcess),
+		).toBe(true);
+	});
+
+	it("stepIsIgnored", () => {
+		const ignoredProcess = new ExtractStep(
+			{},
+			undefined,
+			[new IgnoreByTypeCodegenDescription()],
+		);
+
+		expect(
+			stepIsIgnored(ignoredProcess),
 		).toBe(true);
 	});
 });

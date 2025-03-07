@@ -2,7 +2,8 @@
 	"name": "test-integration",
 	"type": "module",
 	"scripts": {
-	  "test:types": "tsc"
+	  "test:types": "tsc",
+	  "test:codegen": "npx duplojs-types-codegen -i routes -o ../output/outputTypeCodegen.d.ts"
 	},
 	"devDependencies": {
 		"@duplojs/types-codegen": "file:../.."

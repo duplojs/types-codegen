@@ -1,15 +1,19 @@
 import { CreatedHttpResponse, makeResponseContract, NotFoundHttpResponse, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { userSchema } from "@schemas/users";
-import { IgnoreByTypeCodegenDescription, ignoreThisZodSchema } from "@duplojs/types-codegen";
+import { IgnoreByTypeCodegenDescription } from "@duplojs/types-codegen";
 
 useBuilder()
 	.createRoute("GET", "/users/{userId}")
-	.extract({
-		headers: {
-			authorization: ignoreThisZodSchema(
-				zod.string(),
-			),
+	.extract(
+		{
+			headers: {
+				authorization: zod.string(),
+			},
 		},
+		undefined,
+		new IgnoreByTypeCodegenDescription(),
+	)
+	.extract({
 		params: {
 			userId: zod.string(),
 		},

@@ -1,6 +1,6 @@
 import { makeResponseContract, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { generateTypeFromRoutes } from "./generateTypeFromRoutes";
-import { IgnoreByTypeCodegenDescription } from "./ignore/ignoreByTypeCodegenDescription";
+import { IgnoreByTypeCodegenDescription } from "./ignoreByTypeCodegenDescription";
 
 it("generateTypeFromRoutes", () => {
 	const route = useBuilder()

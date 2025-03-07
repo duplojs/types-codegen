@@ -1,6 +1,6 @@
 import { createProcess, ExtractStep, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { getExtractStepFromDuplose } from "./getExtractStepFromDuplose";
-import { IgnoreByTypeCodegenDescription } from "./ignore/ignoreByTypeCodegenDescription";
+import { IgnoreByTypeCodegenDescription } from "./ignoreByTypeCodegenDescription";
 
 it("getExtractStepFromDuplose", () => {
 	const process = createProcess("test")
@@ -11,7 +11,7 @@ it("getExtractStepFromDuplose", () => {
 		.exportation();
 
 	const ignoredProcess = createProcess("test")
-		.extract({ body: {} })
+		.extract({ query: {} })
 		.cut(
 			() => new OkHttpResponse("test"),
 		)
@@ -21,15 +21,14 @@ it("getExtractStepFromDuplose", () => {
 		.preflight(process)
 		.createRoute("GET", "/test")
 		.extract({ params: {} })
+		.extract({ headers: {} }, undefined, new IgnoreByTypeCodegenDescription())
 		.execute(process)
 		.execute(ignoredProcess)
 		.handler(
 			() => new OkHttpResponse("test"),
 		);
 
-	const es = getExtractStepFromDuplose(route);
-
-	expect(es).toEqual([
+	expect(getExtractStepFromDuplose(route)).toEqual([
 		new ExtractStep({ body: {} }),
 		new ExtractStep({ params: {} }),
 		new ExtractStep({ body: {} }),
