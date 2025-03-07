@@ -1,15 +1,19 @@
 import { CreatedHttpResponse, makeResponseContract, NotFoundHttpResponse, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
 import { userSchema } from "@schemas/users";
-import { ignoreThisZodSchema } from "@duplojs/types-codegen";
+import { IgnoreByTypeCodegenDescription } from "@duplojs/types-codegen";
 
 useBuilder()
 	.createRoute("GET", "/users/{userId}")
-	.extract({
-		headers: {
-			authorization: ignoreThisZodSchema(
-				zod.string(),
-			),
+	.extract(
+		{
+			headers: {
+				authorization: zod.string(),
+			},
 		},
+		undefined,
+		new IgnoreByTypeCodegenDescription(),
+	)
+	.extract({
 		params: {
 			userId: zod.string(),
 		},
@@ -50,4 +54,10 @@ useBuilder()
 			},
 		]),
 		makeResponseContract(OkHttpResponse, "users.get", userSchema.array()),
+	);
+
+useBuilder()
+	.createRoute("GET", "/ignore-this-route", new IgnoreByTypeCodegenDescription())
+	.handler(
+		() => new OkHttpResponse("mySuperInfo", "test"),
 	);

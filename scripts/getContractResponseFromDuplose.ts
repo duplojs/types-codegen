@@ -1,6 +1,6 @@
 import { instanceofDuplose, Process, Route, type ContractResponse, type Duplose } from "@duplojs/core";
 import { isStepWithResponse } from "./isStepWithResponse";
-import { duploseIsIgnored } from "./ignore/ignoreThisDuplose";
+import { duploseIsIgnored, stepIsIgnored } from "./ignoreByTypeCodegenDescription";
 
 export function getContractResponseFromDuplose(duplose: Duplose): ContractResponse[] {
 	if (duploseIsIgnored(duplose)) {
@@ -21,7 +21,7 @@ export function getContractResponseFromDuplose(duplose: Duplose): ContractRespon
 					return getContractResponseFromDuplose(step.parent);
 				}
 
-				return isStepWithResponse(step)
+				return isStepWithResponse(step) && !stepIsIgnored(step)
 					? step.responses
 					: [];
 			},

@@ -5,7 +5,7 @@ import { ZodToTypescript } from "@duplojs/zod-to-typescript";
 import { instanceofTransformator } from "./zodToTypescript/typescriptTransformators/instanceof";
 import { receiveFormDataTransformator } from "./zodToTypescript/typescriptTransformators/receiveFormData";
 import { defaultToOptionalHook } from "./zodToTypescript/hooks/defaultToOptional";
-import { duploseIsIgnored } from "./ignore/ignoreThisDuplose";
+import { duploseIsIgnored } from "./ignoreByTypeCodegenDescription";
 
 export function generateTypeFromRoutes(routes: Route[]) {
 	const routesSchema = unionZodSchema(

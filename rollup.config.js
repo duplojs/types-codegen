@@ -3,31 +3,12 @@ import { defineConfig } from "rollup";
 
 export default defineConfig([
 	{
-		input: "scripts/index.ts",
+		input: ["scripts/index.ts", "bin/index.ts"],
 		output: [
 			{
-				file: "dist/index.cjs",
-				format: "cjs",
-			},
-			{
-				file: "dist/index.mjs",
 				format: "esm",
-			},
-		],
-		plugins: [
-			typescript({
-				tsconfig: "tsconfig.build.json",
-				include: /\.[jt]sx?$/,
-				exclude: /node_modules/,
-			}),
-		],
-	},
-	{
-		input: "bin/index.ts",
-		output: [
-			{
-				file: "dist/bin.mjs",
-				format: "esm",
+				dir: "dist",
+				preserveModules: true,
 			},
 		],
 		plugins: [

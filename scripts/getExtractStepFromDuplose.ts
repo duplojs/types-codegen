@@ -1,5 +1,5 @@
 import { type Duplose, ExtractStep, instanceofDuplose, Process, Route } from "@duplojs/core";
-import { duploseIsIgnored } from "./ignore/ignoreThisDuplose";
+import { duploseIsIgnored, stepIsIgnored } from "./ignoreByTypeCodegenDescription";
 
 export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
 	if (duploseIsIgnored(duplose)) {
@@ -20,7 +20,7 @@ export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
 					return getExtractStepFromDuplose(step.parent);
 				}
 
-				return step instanceof ExtractStep
+				return step instanceof ExtractStep && !stepIsIgnored(step)
 					? step
 					: [];
 			},

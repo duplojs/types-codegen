@@ -6,7 +6,7 @@
   "type": "module",
   "repository": "https://github.com/duplojs/types-codegen",
   "bin": {
-    "duplojs-types-codegen": "dist/bin.mjs"
+    "duplojs-types-codegen": "dist/bin/index.js"
   },
   "scripts": {
     "build": "rollup --config && tsc-alias -p tsconfig.build.json",
@@ -30,8 +30,7 @@
   "types": "./dist/scripts/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
+      "import": "./dist/scripts/index.js",
       "types": "./dist/scripts/index.d.ts"
     }
   },

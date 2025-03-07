@@ -3,6 +3,7 @@ import { existsSync, readFileSync, unlinkSync } from "fs";
 
 describe(
 	"command",
+	{ timeout: 20000 },
 	() => {
 		const outputPath = `${process.cwd()}/test/output/outputTypeCodegen.d.ts`;
 
@@ -44,5 +45,4 @@ describe(
 				.toMatchSnapshot();
 		});
 	},
-	{ timeout: 20000 },
 );
