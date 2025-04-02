@@ -17,11 +17,13 @@ export function getContractResponseFromDuplose(duplose: Duplose): ContractRespon
 		...contractResponseFromPreflight,
 		...duplose.definiton.steps.flatMap(
 			(step) => {
-				if (step.parent instanceof Process) {
+				if (stepIsIgnored(step)) {
+					return [];
+				} else if (step.parent instanceof Process) {
 					return getContractResponseFromDuplose(step.parent);
 				}
 
-				return isStepWithResponse(step) && !stepIsIgnored(step)
+				return isStepWithResponse(step)
 					? step.responses
 					: [];
 			},

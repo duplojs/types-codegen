@@ -23,11 +23,21 @@ it("getContractResponseFromDuplose", () => {
 		)
 		.exportation([], new IgnoreByTypeCodegenDescription());
 
+	const ignoredByImplementationProcess = createProcess("test")
+		.extract({ body: {} })
+		.cut(
+			() => new OkHttpResponse("test"),
+			[],
+			processContract,
+		)
+		.exportation([]);
+
 	const route = useBuilder()
 		.preflight(process)
 		.createRoute("GET", "/test")
 		.execute(process)
 		.execute(ignoredProcess)
+		.execute(ignoredByImplementationProcess, undefined, new IgnoreByTypeCodegenDescription())
 		.cut(
 			() => new OkHttpResponse("test"),
 			[],
