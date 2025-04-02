@@ -17,6 +17,13 @@ it("getExtractStepFromDuplose", () => {
 		)
 		.exportation([], new IgnoreByTypeCodegenDescription());
 
+	const ignoredByImplementationProcess = createProcess("test")
+		.extract({ query: {} })
+		.cut(
+			() => new OkHttpResponse("test"),
+		)
+		.exportation([]);
+
 	const route = useBuilder()
 		.preflight(process)
 		.createRoute("GET", "/test")
@@ -24,6 +31,7 @@ it("getExtractStepFromDuplose", () => {
 		.extract({ headers: {} }, undefined, new IgnoreByTypeCodegenDescription())
 		.execute(process)
 		.execute(ignoredProcess)
+		.execute(ignoredByImplementationProcess, undefined, new IgnoreByTypeCodegenDescription())
 		.handler(
 			() => new OkHttpResponse("test"),
 		);

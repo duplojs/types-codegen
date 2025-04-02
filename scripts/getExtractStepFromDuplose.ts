@@ -16,11 +16,13 @@ export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
 		...extractStepFromPreflight,
 		...duplose.definiton.steps.flatMap(
 			(step) => {
-				if (step.parent instanceof Process) {
+				if (stepIsIgnored(step)) {
+					return [];
+				} else if (step.parent instanceof Process) {
 					return getExtractStepFromDuplose(step.parent);
 				}
 
-				return step instanceof ExtractStep && !stepIsIgnored(step)
+				return step instanceof ExtractStep
 					? step
 					: [];
 			},
