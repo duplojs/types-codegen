@@ -1,4 +1,4 @@
-import { zod, ZodSpace, type Route } from "@duplojs/core";
+import { zod, type Route } from "@duplojs/core";
 import { concatExtractSteps } from "./concatExtractSteps";
 import { getExtractStepFromDuplose } from "./getExtractStepFromDuplose";
 import { getContractResponseFromDuplose } from "./getContractResponseFromDuplose";
@@ -23,13 +23,13 @@ export function routeToZodSchema(route: Route) {
 	const extractStep = getExtractStepFromDuplose(route);
 	const variableRequestValue = concatExtractSteps(extractStep);
 
-	const routesSchema = route.definiton.paths
+	const routesSchema = route.fullPaths
 		.map(
 			(path) => zod.object({
 				method: zod.literal(route.definiton.method),
-				path: new ZodSpace.ZodLiteral({
+				path: new zod.ZodLiteral({
 					value: path,
-					typeName: ZodSpace.ZodFirstPartyTypeKind.ZodLiteral,
+					typeName: zod.ZodFirstPartyTypeKind.ZodLiteral,
 					asteriskToStringInterpolation: true,
 				}),
 				...variableRequestValue,
