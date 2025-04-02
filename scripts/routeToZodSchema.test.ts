@@ -1,6 +1,5 @@
-import { createProcess, OkHttpResponse, useBuilder, zod } from "@duplojs/core";
+import { createProcess, OkHttpResponse, useBuilder, zod, ContextPrefixDescription } from "@duplojs/core";
 import { routeToZodSchema } from "./routeToZodSchema";
-import path from "path";
 
 it("routeToZodSchema", () => {
 	const routeContract = new OkHttpResponse("test", zod.string());
@@ -15,7 +14,7 @@ it("routeToZodSchema", () => {
 		)
 		.exportation();
 
-	const route = useBuilder()
+	const route = useBuilder(new ContextPrefixDescription("context-prefix"))
 		.preflight(process)
 		.createRoute("GET", "/test")
 		.extract({ body: zod.string() })
@@ -30,7 +29,7 @@ it("routeToZodSchema", () => {
 	expect(
 		result!.safeParse({
 			method: "GET",
-			path: "/test",
+			path: "/context-prefix/test",
 			body: "toto",
 			params: { id: "toto" },
 			response: {
@@ -46,7 +45,7 @@ it("routeToZodSchema", () => {
 			params: {
 				id: "toto",
 			},
-			path: "/test",
+			path: "/context-prefix/test",
 			response: {
 				body: "toto",
 				code: 200,
