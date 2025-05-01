@@ -34,7 +34,7 @@ export function routeToZodSchema(route: Route) {
 				}),
 				...variableRequestValue,
 				response,
-			}).passthrough(),
+			}),
 		);
 
 	return unionZodSchema(routesSchema);

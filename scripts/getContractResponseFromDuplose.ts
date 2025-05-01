@@ -7,15 +7,13 @@ export function getContractResponseFromDuplose(duplose: Duplose): ContractRespon
 		return [];
 	}
 
-	const contractResponseFromPreflight = instanceofDuplose(Route, duplose)
-		? duplose.definiton.preflightSteps.flatMap(
-			(preflightStep) => getContractResponseFromDuplose(preflightStep.parent),
-		)
-		: [];
-
 	return [
-		...contractResponseFromPreflight,
-		...duplose.definiton.steps.flatMap(
+		...instanceofDuplose(Route, duplose)
+			? duplose.definiton.preflightSteps
+			: [],
+		...duplose.definiton.steps,
+	]
+		.flatMap(
 			(step) => {
 				if (stepIsIgnored(step)) {
 					return [];
@@ -27,6 +25,5 @@ export function getContractResponseFromDuplose(duplose: Duplose): ContractRespon
 					? step.responses
 					: [];
 			},
-		),
-	];
+		);
 }

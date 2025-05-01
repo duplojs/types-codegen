@@ -38,8 +38,8 @@
     "@duplojs/core": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "@duplojs/utils": "0.2.1",
-    "@duplojs/zod-to-typescript": "0.2.4",
+    "@duplojs/utils": "0.3.1",
+    "@duplojs/zod-to-typescript": "0.4.1",
     "commander": "12.1.0",
     "ignore": "6.0.2",
     "typescript": "5.5.4",
