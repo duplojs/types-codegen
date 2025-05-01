@@ -34,6 +34,7 @@ it("getContractResponseFromDuplose", () => {
 
 	const route = useBuilder()
 		.preflight(process)
+		.preflight(process, undefined, new IgnoreByTypeCodegenDescription())
 		.createRoute("GET", "/test")
 		.execute(process)
 		.execute(ignoredProcess)

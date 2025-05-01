@@ -26,6 +26,7 @@ it("getExtractStepFromDuplose", () => {
 
 	const route = useBuilder()
 		.preflight(process)
+		.preflight(process, undefined, new IgnoreByTypeCodegenDescription())
 		.createRoute("GET", "/test")
 		.extract({ params: {} })
 		.extract({ headers: {} }, undefined, new IgnoreByTypeCodegenDescription())

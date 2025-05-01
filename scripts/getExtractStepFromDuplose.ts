@@ -6,15 +6,13 @@ export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
 		return [];
 	}
 
-	const extractStepFromPreflight = instanceofDuplose(Route, duplose)
-		? duplose.definiton.preflightSteps.flatMap(
-			(preflightStep) => getExtractStepFromDuplose(preflightStep.parent),
-		)
-		: [];
-
 	return [
-		...extractStepFromPreflight,
-		...duplose.definiton.steps.flatMap(
+		...instanceofDuplose(Route, duplose)
+			? duplose.definiton.preflightSteps
+			: [],
+		...duplose.definiton.steps,
+	]
+		.flatMap(
 			(step) => {
 				if (stepIsIgnored(step)) {
 					return [];
@@ -26,6 +24,5 @@ export function getExtractStepFromDuplose(duplose: Duplose): ExtractStep[] {
 					? step
 					: [];
 			},
-		),
-	];
+		);
 }
